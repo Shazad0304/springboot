@@ -3,10 +3,15 @@ package com.example.demo.service;
 import com.example.demo.dao.PersonDAO;
 import com.example.demo.dao.PersonData;
 import com.example.demo.model.Person;
+import com.example.demo.sql.connectSQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -46,4 +51,15 @@ public class PersonService {
         pd.save(p);
         return true;
     }
+
+    public List<Person> getshz() throws SQLException {
+        Statement st = connectSQL.get().createStatement();
+        ResultSet rs = st.executeQuery("select * from people");
+        while(rs.next()){
+            System.out.println(rs.getString("name"));
+        }
+        return pd.findShazad();
+    }
+
+
 }

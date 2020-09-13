@@ -8,6 +8,7 @@ import com.example.demo.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,6 +35,11 @@ public class PersonController {
     @GetMapping(path = "{id}")
     public Person getByid(@PathVariable("id") UUID id){
         return ps.ByID(id).orElse(null);
+    }
+
+    @GetMapping(path = "/shazad/any")
+    public List<Person> getShaz() throws SQLException {
+        return ps.getshz();
     }
 
     @DeleteMapping(path = "{id}")
